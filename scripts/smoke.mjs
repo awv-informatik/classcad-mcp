@@ -44,8 +44,8 @@ async function main() {
   const ins = JSON.parse(i0.content[0].text)
   console.log(`found=${ins.found}, class=${ins.node?.class}, name=${ins.node?.name}`)
 
-  console.log('\n--- list_methods { domain: "part", search: "box" } ---')
-  const lm = await client.callTool({ name: 'list_methods', arguments: { domain: 'part', search: 'box' } })
+  console.log('\n--- list_methods { domain: "part", search: "box", withSummaries: true } ---')
+  const lm = await client.callTool({ name: 'list_methods', arguments: { domain: 'part', search: 'box', withSummaries: true } })
   const lmd = JSON.parse(lm.content[0].text)
   console.log(`matched ${lmd.count} methods`)
   console.log(lmd.methods.slice(0, 5).map(m => `  ${m.method} — ${m.summary}`).join('\n'))
@@ -76,7 +76,7 @@ async function main() {
 
   console.log('\n--- snapshot (the box we just made) ---')
   const snap = await client.callTool({ name: 'snapshot', arguments: { label: 'box-via-mcp' } })
-  console.log(`Returned ${snap.content.length} content blocks`)
+  console.log(`Returned ${snap.content.length} content block(s)`)
   for (const b of snap.content) {
     if (b.type === 'image') {
       const bytes = b.data ? Buffer.from(b.data, 'base64').length : 0
