@@ -8,7 +8,6 @@ import { fileURLToPath } from 'node:url'
 const root = join(dirname(fileURLToPath(import.meta.url)), '..')
 
 const assets = [
-  ['src/method-registry.json', 'dist/method-registry.json'],
   ['src/render.mjs', 'dist/render.mjs'],
 ]
 
